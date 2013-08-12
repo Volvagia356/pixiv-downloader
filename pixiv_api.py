@@ -16,6 +16,7 @@ class Work:
         for i in range(len(line)):
             if attributes[i]=='' : continue
             else: setattr(self,attributes[i],line[i])
+        self.img_folder=self.img_folder.zfill(2)
     
     def get_full_url(self,page=None):
         single_fmt="http://i{}.pixiv.net/img{}/img/{}/{}.{}"
