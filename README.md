@@ -25,6 +25,14 @@ is a Python pickle of the ```Work``` objects from the ```pixiv_api``` module
 used by the script. It contains metadata like the titles, descriptions, etc.
 of each work, as fetched from the API.
 
+GUI
+---
+A GUI has been implemented in Tkinter can be found in ```pixivdl-gui.py```.
+The inputs for the GUI are similar to the command line arguments.
+
+Do note that when "Cancel" is clicked, the download process isn't immediately cancelled.
+Instead, it would only be cancelled when the current work has completed downloading.
+
 Logging In
 ----------
 This script works without logging in to pixiv. However, if you want to download
@@ -33,7 +41,7 @@ authenticate yourself.
 
 Unfortunately, I could not figure out how logging in works, and thus have used
 an alternative method. You must first log in to pixiv in your web browser, 
-then copy the contents if the PHPSESSID cookie into a file at ```~/.config/pixivdl/session```
+then copy the contents of the PHPSESSID cookie into a file at ```~/.config/pixivdl/session```
 
 API
 ---
