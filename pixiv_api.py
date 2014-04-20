@@ -20,9 +20,12 @@ class Work:
     
     def get_full_url(self,page=None):
         single_fmt="http://i{}.pixiv.net/img{}/img/{}/{}.{}"
-        novel_fmt="http://i{}.pixiv.net/img{}/img/{}/{}_p{}.{}"
-        private_salt=self.preview_url.split('/')[-1].split('_')[1]
+        if int(self.id)>11320000: #ID 11320066 uses new URL, 11319887 uses old URL, 11319948 uses old URL, but site thinks it uses new URL.
+            novel_fmt="http://i{}.pixiv.net/img{}/img/{}/{}_big_p{}.{}"
+        else:
+            novel_fmt="http://i{}.pixiv.net/img{}/img/{}/{}_p{}.{}"
         if len(self.preview_url.split('/')[-1].split('_'))==3:
+            private_salt=self.preview_url.split('/')[-1].split('_')[1]
             work_id="{}_{}".format(self.id,private_salt)
         else:
             work_id=self.id
