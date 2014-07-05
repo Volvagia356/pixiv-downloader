@@ -12,7 +12,7 @@ def print_welcome():
     print ''
 
 def print_usage():
-    print "Usage: {} artist_id [directory]".format(sys.argv[0].split('/')[-1])
+    print "Usage: {} artist_id|tag [directory]".format(sys.argv[0].split('/')[-1])
     print ''
 
 def check_version():
@@ -59,17 +59,25 @@ def main():
     if len(sys.argv)<2:
         print_usage()
         sys.exit()
-    artist_id=sys.argv[1]
+    input_str=sys.argv[1]
     if len(sys.argv)==3:
         directory=sys.argv[2]
     else:
         directory='.'
     session_id=get_session_config()
     p=Pixiv(session_id)
-    works=p.get_works_all(artist_id)
-    for work in works:
-        download_work(work,directory)
-    pickle.dump(works,open(directory+"/metadata.pickle",'wb'))
+    if input_str.isdigit():
+        works=p.get_works_all(input_str)
+        total_works = works
+        for work in works:
+            download_work(work,directory)
+    else:
+        total_works = []
+        for works in p.get_tagged_all(input_str):
+            total_works += works
+            for work in works:
+                download_work(work,directory)
+    pickle.dump(total_works,open(directory+"/metadata.pickle",'wb'))
     print ''
 
 if __name__=="__main__":

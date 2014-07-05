@@ -81,3 +81,26 @@ class Pixiv:
             works.extend(current_works)
             page+=1
         return works
+    
+    def get_tagged(self, tag, page=1):
+        query={
+            'tag': tag,
+            'p': page,
+        }
+        data=self.make_request("iphone/tags.php",query)
+        if data=="": return False
+        lines=csv.reader(data)
+        works=[]
+        for line in lines:
+            works.append(Work(line))
+        return works
+    
+    def get_tagged_all(self, tag):
+        page = 1
+        while True:
+            works = self.get_tagged(tag, page)
+            if works:
+                yield works
+                page+=1
+            else:
+                break

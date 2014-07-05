@@ -10,11 +10,16 @@ Python 2.7 is required.
 
 Usage
 -----
-```pixivdl.py artist_id [directory]```
+```pixivdl.py artist_id|tag [directory]```
 
 ```artist_id``` refers to the unique numerical ID for the artist, which can be
 found in the URL. For example, ```http://www.pixiv.net/member.php?id=92448``` would
 have an ID of ```92448```.
+
+```tag``` refers to a pixiv tag, applied by the artist to a work.
+
+If all characters of the argument are digits, it is assumed to be an artist ID.
+Otherwise, it is assumed to be a tag.
 
 ```directory``` specifies the directory in which works would be downloaded to.
 It is optional, and works will be downloaded to the present working directory
